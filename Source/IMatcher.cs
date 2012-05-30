@@ -42,8 +42,7 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-	// @mbrit - 2012-05-30 - needs to be reverted back to internal...
-	public interface IMatcher
+	internal interface IMatcher
 	{
 		void Initialize(Expression matcherExpression);
 		bool Matches(object value);

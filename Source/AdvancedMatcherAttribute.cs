@@ -43,9 +43,7 @@ using System.Reflection;
 
 namespace Moq
 {
-	// @mbrit - 2012-05-30 - revert to internal...
-	[AttributeUsage(AttributeTargets.Method, Inherited = true)]
-	public sealed class AdvancedMatcherAttribute : Attribute
+	internal sealed class AdvancedMatcherAttribute : Attribute
 	{
 		public AdvancedMatcherAttribute(Type matcherType)
 		{

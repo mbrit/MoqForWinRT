@@ -77,8 +77,7 @@ namespace Moq
 		/// consumers, but it's important for 
 		/// our own tests.
 		/// </summary>
-		// @mbrit - 2012-05-30 - revert to internal
-		public enum ExceptionReason
+		internal enum ExceptionReason
 		{
 			NoSetup,
 			ReturnValueRequired,
@@ -110,8 +109,7 @@ namespace Moq
 			this.reason = reason;
 		}
 
-		// @mbrit - 2012-05-30 - revert to internal
-		public ExceptionReason Reason
+		internal ExceptionReason Reason
 		{
 			get { return reason; }
 		}
@@ -166,8 +164,7 @@ namespace Moq
 #if !SILVERLIGHT
 	[Serializable]
 #endif
-	// @mbrit - 2012-05-30 - revert to internal...
-	public class MockVerificationException : MockException
+	internal class MockVerificationException : MockException
 	{
 		IProxyCall[] failedSetups;
 

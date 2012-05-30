@@ -15,7 +15,7 @@ namespace Moq.Tests
 	[TestClass]
 #endif
 	public class AdvancedMatcherAttributeFixture
-	{
+	{	
 		[Fact]
 		public void ShouldThrowIfNullMatcherType()
 		{

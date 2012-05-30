@@ -11,24 +11,11 @@ namespace System.Linq
 {
 	internal static class LinqExtender
 	{
-		internal static MethodInfo Method<T>(this Func<T> func)
-		{
-			throw new NotImplementedException("This operation has not been implemented.");
-		}
-
-		internal static MethodInfo Method<T>(this Expression<T> func)
-		{
-			throw new NotImplementedException("This operation has not been implemented.");
-		}
-
-		internal static MethodInfo Method<T>(this Action<T> func)
-		{
-			throw new NotImplementedException("This operation has not been implemented.");
-		}
-
 		internal static MethodInfo Method(this Delegate d)
 		{
-			throw new NotImplementedException("This operation has not been implemented.");
+			// @mbrit - 2012-05-30 - this will likely fail store validation...
+			var info = d.GetType().GetProperty("Method", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+			return (MethodInfo)info.GetValue(d);
 		}
 	}
 }

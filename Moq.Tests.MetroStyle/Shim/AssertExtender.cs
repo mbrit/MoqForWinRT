@@ -55,9 +55,9 @@ namespace Moq.Tests
 			Assert.IsNotNull(a);
 		}
 
-		internal static void Contains(string p1, string p2)
+		internal static void Contains(string a, string b)
 		{
-			throw new NotImplementedException();
+			Assert.AreNotEqual(-1, b.IndexOf(a));
 		}
 
 		internal static void True(bool result)

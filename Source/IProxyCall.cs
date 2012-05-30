@@ -44,8 +44,7 @@ using Moq.Proxy;
 
 namespace Moq
 {
-	// @mbrit - 2012-05-30 - revert to internal...
-	public interface IProxyCall
+	internal interface IProxyCall
 	{
 		int CallCount { get; }
 		bool IsConditional { get; }

@@ -44,11 +44,20 @@ namespace System.Reflection
 
 		public static MethodInfo GetMethod(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
 		{
-			foreach (var method in type.GetTypeInfo().DeclaredMethods.Where(v => v.Name == name))
+			// walk up the hierarchy...
+			var info = type.GetTypeInfo();
+			while(info != null)
 			{
-				if (method.CheckBindings(flags))
-					return method;
+				foreach (var method in info.DeclaredMethods.Where(v => v.Name == name))
+				{
+					if (method.CheckBindings(flags))
+						return method;
+				}
+
+				// up...
+				info = info.BaseType.GetTypeInfo();
 			}
+
 
 			// not found
 			throw new MissingMethodException(string.Format("A method called '{0}' on type '{1}' was not found.", name, type));
@@ -232,7 +241,7 @@ namespace System.Reflection
 
 		public static ConstructorInfo GetConstructor(this Type type, params Type[] types)
 		{
-			throw new NotImplementedException("This operation has not been implemented.");
+			return type.GetConstructor(BindingFlags.Public, null, types, null);
 		}
 
 		public static ConstructorInfo GetConstructor(this Type type, BindingFlags flags, object binder, Type[] types, object[] modifiers)
@@ -272,7 +281,21 @@ namespace System.Reflection
 
 		public static PropertyInfo GetProperty(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
 		{
-			throw new NotImplementedException("This operation has not been implemented.");
+			// walk up the hierarchy...
+			var info = type.GetTypeInfo();
+			while (info != null)
+			{
+				foreach (var prop in info.DeclaredProperties.Where(v => v.Name == name))
+				{
+					if (prop.CheckBindings(flags))
+						return prop;
+				}
+
+				// up...
+				info = info.BaseType.GetTypeInfo();
+			}
+
+			throw new MissingMemberException(string.Format("A property with name '{0}' was not found on '{1}'.", name, type));
 		}
 
 		public static EventInfo GetEvent(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
