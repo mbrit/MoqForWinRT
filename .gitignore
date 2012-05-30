@@ -1,0 +1,9 @@
+.DS_Store
+*.pidb
+*.userprefs
+*.user
+*.suo
+_Resharper*
+obj
+bin
+TestResults/

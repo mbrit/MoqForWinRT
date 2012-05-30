@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B78FA8AF-AF2F-438E-9DC9-2CA8E6E1EA22}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Moq</RootNamespace>
+    <AssemblyName>Moq.MetroStyle</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE, SILVERLIGHT</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Source\AdvancedMatcherAttribute.cs">
+      <Link>AdvancedMatcherAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\AsInterface.cs">
+      <Link>AsInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\ConditionalContext.cs">
+      <Link>ConditionalContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\DefaultValue.cs">
+      <Link>DefaultValue.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\EmptyDefaultValueProvider.cs">
+      <Link>EmptyDefaultValueProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Evaluator.cs">
+      <Link>Evaluator.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\ExpressionExtensions.cs">
+      <Link>ExpressionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\ExpressionStringBuilder.cs">
+      <Link>ExpressionStringBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Extensions.cs">
+      <Link>Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\FluentMockContext.cs">
+      <Link>FluentMockContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\GlobalSuppressions.cs">
+      <Link>GlobalSuppressions.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Guard.cs">
+      <Link>Guard.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\IDefaultValueProvider.cs">
+      <Link>IDefaultValueProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\IHideObjectMembers.cs">
+      <Link>IHideObjectMembers.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\IMatcher.cs">
+      <Link>IMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\IMocked.cs">
+      <Link>IMocked.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Interceptor.cs">
+      <Link>Interceptor.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\IProxyCall.cs">
+      <Link>IProxyCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\It.cs">
+      <Link>It.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\Flow\ICallbackResult.cs">
+      <Link>Language\NewFolder1\ICallbackResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\Flow\IReturnsResult.cs">
+      <Link>Language\NewFolder1\IReturnsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\Flow\IReturnsThrows.cs">
+      <Link>Language\NewFolder1\IReturnsThrows.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\Flow\ISetup.cs">
+      <Link>Language\NewFolder1\ISetup.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\Flow\IThrowsResult.cs">
+      <Link>Language\NewFolder1\IThrowsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\ICallback.cs">
+      <Link>Language\ICallback.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\ICallback1.Generated.cs">
+      <Link>Language\ICallback1.Generated.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ICallback.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\Source\Language\ICallbackGetter.cs">
+      <Link>Language\ICallbackGetter.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\ICallbackSetter.cs">
+      <Link>Language\ICallbackSetter.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\IRaise.cs">
+      <Link>Language\IRaise.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\IRaise1.Generated.cs">
+      <Link>Language\IRaise1.Generated.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IRaise.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\Source\Language\IReturns.cs">
+      <Link>Language\IReturns.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\IReturns1.Generated.cs">
+      <Link>Language\IReturns1.Generated.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IReturns.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\Source\Language\IReturnsGetter.cs">
+      <Link>Language\IReturnsGetter.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\ISetupConditionResult.cs">
+      <Link>Language\ISetupConditionResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\ISetupSequentialResult.cs">
+      <Link>Language\ISetupSequentialResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\IThrows.cs">
+      <Link>Language\IThrows.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Language\IVerifies.cs">
+      <Link>Language\IVerifies.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Linq\FluentMockVisitor.cs">
+      <Link>Linq\FluentMockVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Linq\Mock.cs">
+      <Link>Linq\Mock.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Linq\MockQuery.cs">
+      <Link>Linq\MockQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Linq\MockRepository.cs">
+      <Link>Linq\MockRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Linq\Mocks.cs">
+      <Link>Linq\Mocks.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Linq\MockSetupsBuilder.cs">
+      <Link>Linq\MockSetupsBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Match.cs">
+      <Link>Match.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MatcherAttribute.cs">
+      <Link>MatcherAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MatcherFactory.cs">
+      <Link>MatcherFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Matchers\ConstantMatcher.cs">
+      <Link>Matchers\ConstantMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Matchers\ExpressionComparer.cs">
+      <Link>Matchers\ExpressionComparer.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Matchers\ExpressionMatcher.cs">
+      <Link>Matchers\ExpressionMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Matchers\LazyEvalMatcher.cs">
+      <Link>Matchers\LazyEvalMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Matchers\Matcher.cs">
+      <Link>Matchers\Matcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Matchers\MatcherAttributeMatcher.cs">
+      <Link>Matchers\MatcherAttributeMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Matchers\ParamArrayMatcher.cs">
+      <Link>Matchers\ParamArrayMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Matchers\PredicateMatcher.cs">
+      <Link>Matchers\PredicateMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Matchers\RefMatcher.cs">
+      <Link>Matchers\RefMatcher.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MatchExpression.cs">
+      <Link>MatchExpression.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MemberInfoExtensions.cs">
+      <Link>MemberInfoExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MethodCall.cs">
+      <Link>MethodCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MethodCall1.Generated.cs">
+      <Link>MethodCall1.Generated.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MethodCall.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\Source\MethodCallReturn.cs">
+      <Link>MethodCallReturn.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MethodCallReturn1.Generated.cs">
+      <Link>MethodCallReturn1.Generated.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MethodCallReturn.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\Source\Microsoft\Delegates.cs">
+      <Link>Microsoft\Delegates.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Microsoft\Delegates1.cs">
+      <Link>Microsoft\Delegates1.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Delegates.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\Source\Microsoft\ExpressionVisitor.cs">
+      <Link>Microsoft\ExpressionVisitor.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Mock.cs">
+      <Link>Mock.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Mock.Generic.cs">
+      <Link>Mock.Generic.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MockBehavior.cs">
+      <Link>MockBehavior.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MockDefaultValueProvider.cs">
+      <Link>MockDefaultValueProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MockException.cs">
+      <Link>MockException.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MockRepository.cs">
+      <Link>MockRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\MockSequence.cs">
+      <Link>MockSequence.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Obsolete\IOccurrence.cs">
+      <Link>Obsolete\IOccurrence.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Obsolete\Mock.Generic.Legacy.cs">
+      <Link>Obsolete\Mock.Generic.Legacy.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Obsolete\Mock.Legacy.cs">
+      <Link>Obsolete\Mock.Legacy.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Obsolete\MockExtensions.cs">
+      <Link>Obsolete\MockExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Obsolete\MockFactory.cs">
+      <Link>Obsolete\MockFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\PexProtector.cs">
+      <Link>PexProtector.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Protected\IProtectedMock.cs">
+      <Link>Protected\IProtectedMock.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Protected\ItExpr.cs">
+      <Link>Protected\ItExpr.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Protected\ProtectedExtension.cs">
+      <Link>Protected\ProtectedExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Protected\ProtectedMock.cs">
+      <Link>Protected\ProtectedMock.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Proxy\CastleProxyFactory.cs">
+      <Link>Proxy\CastleProxyFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Proxy\ICallContext.cs">
+      <Link>Proxy\ICallContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Proxy\ICallInterceptor.cs">
+      <Link>Proxy\ICallInterceptor.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Proxy\IProxyFactory.cs">
+      <Link>Proxy\IProxyFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Range.cs">
+      <Link>Range.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\SequenceExtensions.cs">
+      <Link>SequenceExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\SetterMethodCall.cs">
+      <Link>SetterMethodCall.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\SetupKind.cs">
+      <Link>SetupKind.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\SetupSequentialContext.cs">
+      <Link>SetupSequentialContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\Times.cs">
+      <Link>Times.cs</Link>
+    </Compile>
+    <Compile Include="Castle\AbstractInvocation.cs" />
+    <Compile Include="Castle\AllMethodsHook.cs" />
+    <Compile Include="Castle\Contributors\ClassMembersCollector.cs" />
+    <Compile Include="Castle\Contributors\ClassProxyInstanceContributor.cs" />
+    <Compile Include="Castle\Contributors\ClassProxyTargetContributor.cs" />
+    <Compile Include="Castle\Contributors\ClassProxyWithTargetTargetContributor.cs" />
+    <Compile Include="Castle\Contributors\CompositeTypeContributor.cs" />
+    <Compile Include="Castle\Contributors\DelegateProxyTargetContributor.cs" />
+    <Compile Include="Castle\Contributors\Delegates.cs" />
+    <Compile Include="Castle\Contributors\DelegateTypeGenerator.cs" />
+    <Compile Include="Castle\Contributors\ForwardingMethodGenerator.cs" />
+    <Compile Include="Castle\Contributors\InterfaceMembersCollector.cs" />
+    <Compile Include="Castle\Contributors\InterfaceMembersOnClassCollector.cs" />
+    <Compile Include="Castle\Contributors\InterfaceProxyInstanceContributor.cs" />
+    <Compile Include="Castle\Contributors\InterfaceProxyTargetContributor.cs" />
+    <Compile Include="Castle\Contributors\InterfaceProxyWithOptionalTargetContributor.cs" />
+    <Compile Include="Castle\Contributors\InterfaceProxyWithoutTargetContributor.cs" />
+    <Compile Include="Castle\Contributors\InterfaceProxyWithTargetInterfaceTargetContributor.cs" />
+    <Compile Include="Castle\Contributors\InvocationWithDelegateContributor.cs" />
+    <Compile Include="Castle\Contributors\InvocationWithGenericDelegateContributor.cs" />
+    <Compile Include="Castle\Contributors\ITypeContributor.cs" />
+    <Compile Include="Castle\Contributors\MembersCollector.cs" />
+    <Compile Include="Castle\Contributors\MinimialisticMethodGenerator.cs" />
+    <Compile Include="Castle\Contributors\MixinContributor.cs" />
+    <Compile Include="Castle\Contributors\OptionallyForwardingMethodGenerator.cs" />
+    <Compile Include="Castle\Contributors\ProxyInstanceContributor.cs" />
+    <Compile Include="Castle\Contributors\WrappedClassMembersCollector.cs" />
+    <Compile Include="Castle\DefaultProxyBuilder.cs" />
+    <Compile Include="Castle\Generators\AttributeDisassembler.cs" />
+    <Compile Include="Castle\Generators\AttributesToAvoidReplicating.cs" />
+    <Compile Include="Castle\Generators\BaseProxyGenerator.cs" />
+    <Compile Include="Castle\Generators\CacheKey.cs" />
+    <Compile Include="Castle\Generators\ClassProxyGenerator.cs" />
+    <Compile Include="Castle\Generators\ClassProxyWithTargetGenerator.cs" />
+    <Compile Include="Castle\Generators\CompositionInvocationTypeGenerator.cs" />
+    <Compile Include="Castle\Generators\DelegateMembersCollector.cs" />
+    <Compile Include="Castle\Generators\DelegateProxyGenerationHook.cs" />
+    <Compile Include="Castle\Generators\DelegateProxyGenerator.cs" />
+    <Compile Include="Castle\Generators\Emitters\AbstractTypeEmitter.cs" />
+    <Compile Include="Castle\Generators\Emitters\ArgumentsUtil.cs" />
+    <Compile Include="Castle\Generators\Emitters\ClassEmitter.cs" />
+    <Compile Include="Castle\Generators\Emitters\CodeBuilders\AbstractCodeBuilder.cs" />
+    <Compile Include="Castle\Generators\Emitters\CodeBuilders\ConstructorCodeBuilder.cs" />
+    <Compile Include="Castle\Generators\Emitters\CodeBuilders\MethodCodeBuilder.cs" />
+    <Compile Include="Castle\Generators\Emitters\ConstructorCollection.cs" />
+    <Compile Include="Castle\Generators\Emitters\ConstructorEmitter.cs" />
+    <Compile Include="Castle\Generators\Emitters\EventCollection.cs" />
+    <Compile Include="Castle\Generators\Emitters\EventEmitter.cs" />
+    <Compile Include="Castle\Generators\Emitters\GenericUtil.cs" />
+    <Compile Include="Castle\Generators\Emitters\IMemberEmitter.cs" />
+    <Compile Include="Castle\Generators\Emitters\LdcOpCodesDictionary.cs" />
+    <Compile Include="Castle\Generators\Emitters\LdindOpCodesDictionary.cs" />
+    <Compile Include="Castle\Generators\Emitters\MethodCollection.cs" />
+    <Compile Include="Castle\Generators\Emitters\MethodEmitter.cs" />
+    <Compile Include="Castle\Generators\Emitters\NestedClassCollection.cs" />
+    <Compile Include="Castle\Generators\Emitters\NestedClassEmitter.cs" />
+    <Compile Include="Castle\Generators\Emitters\OpCodeUtil.cs" />
+    <Compile Include="Castle\Generators\Emitters\PropertiesCollection.cs" />
+    <Compile Include="Castle\Generators\Emitters\PropertyEmitter.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\AddressOfReferenceExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ArgumentReference.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\AssignArgumentStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\AssignArrayStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\AssignStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\AsTypeReference.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\BindDelegateExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ByRefReference.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ConstReference.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ConstructorInvocationStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ConvertExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\DefaultValueExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\EndExceptionBlockStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\Expression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ExpressionStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\FieldReference.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\FinallyStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\IfNullExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\IILEmitter.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\IndirectReference.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\LiteralIntExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\LoadArrayElementExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\LoadRefArrayElementExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\LocalReference.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\MethodInvocationExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\MethodTokenExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\MultiStatementExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\NewArrayExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\NewInstanceExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\NopStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\NullCoalescingOperatorExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\NullExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\Reference.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ReferenceExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ReferencesToObjectArrayExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ReturnReferenceExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ReturnStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\SelfReference.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\Statement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ThrowStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\TryStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\TypeReference.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\TypeTokenExpression.cs" />
+    <Compile Include="Castle\Generators\Emitters\StindOpCodesDictionary.cs" />
+    <Compile Include="Castle\Generators\Emitters\StrongNameUtil.cs" />
+    <Compile Include="Castle\Generators\Emitters\TypeConstructorEmitter.cs" />
+    <Compile Include="Castle\Generators\Emitters\TypeUtil.cs" />
+    <Compile Include="Castle\Generators\GeneratorException.cs" />
+    <Compile Include="Castle\Generators\GeneratorUtil.cs" />
+    <Compile Include="Castle\Generators\IGenerator.cs" />
+    <Compile Include="Castle\Generators\IInvocationCreationContributor.cs" />
+    <Compile Include="Castle\Generators\INamingScope.cs" />
+    <Compile Include="Castle\Generators\InheritanceInvocationTypeGenerator.cs" />
+    <Compile Include="Castle\Generators\InterfaceProxyWithoutTargetGenerator.cs" />
+    <Compile Include="Castle\Generators\InterfaceProxyWithTargetGenerator.cs" />
+    <Compile Include="Castle\Generators\InterfaceProxyWithTargetInterfaceGenerator.cs" />
+    <Compile Include="Castle\Generators\InvocationTypeGenerator.cs" />
+    <Compile Include="Castle\Generators\MetaEvent.cs" />
+    <Compile Include="Castle\Generators\MetaMethod.cs" />
+    <Compile Include="Castle\Generators\MetaProperty.cs" />
+    <Compile Include="Castle\Generators\MetaType.cs" />
+    <Compile Include="Castle\Generators\MetaTypeElement.cs" />
+    <Compile Include="Castle\Generators\MethodFinder.cs" />
+    <Compile Include="Castle\Generators\MethodGenerator.cs" />
+    <Compile Include="Castle\Generators\MethodSignatureComparer.cs" />
+    <Compile Include="Castle\Generators\MethodWithInvocationGenerator.cs" />
+    <Compile Include="Castle\Generators\NamingScope.cs" />
+    <Compile Include="Castle\Generators\TypeElementCollection.cs" />
+    <Compile Include="Castle\IAttributeDisassembler.cs" />
+    <Compile Include="Castle\IChangeProxyTarget.cs" />
+    <Compile Include="Castle\IInterceptor.cs" />
+    <Compile Include="Castle\IInterceptorSelector.cs" />
+    <Compile Include="Castle\IInvocation.cs" />
+    <Compile Include="Castle\Internal\AttributeUtil.cs" />
+    <Compile Include="Castle\Internal\CompositionInvocation.cs" />
+    <Compile Include="Castle\Internal\InheritanceInvocation.cs" />
+    <Compile Include="Castle\Internal\InternalsUtil.cs" />
+    <Compile Include="Castle\Internal\InvocationHelper.cs" />
+    <Compile Include="Castle\InvalidMixinConfigurationException.cs" />
+    <Compile Include="Castle\InvalidProxyConstructorArgumentsException.cs" />
+    <Compile Include="Castle\IProxyBuilder.cs" />
+    <Compile Include="Castle\IProxyGenerationHook.cs" />
+    <Compile Include="Castle\IProxyTargetAccessor.cs" />
+    <Compile Include="Castle\MixinData.cs" />
+    <Compile Include="Castle\ModuleScope.cs" />
+    <Compile Include="Castle\PersistentProxyBuilder.cs" />
+    <Compile Include="Castle\ProxyGenerationException.cs" />
+    <Compile Include="Castle\ProxyGenerationOptions.cs" />
+    <Compile Include="Castle\ProxyGenerator.cs" />
+    <Compile Include="Castle\ProxyUtil.cs" />
+    <Compile Include="Castle\Serialization\CacheMappingsAttribute.cs" />
+    <Compile Include="Castle\Serialization\ProxyObjectReference.cs" />
+    <Compile Include="Castle\Serialization\ProxyTypeConstants.cs" />
+    <Compile Include="Castle\Serialization\RemotableInvocation.cs" />
+    <Compile Include="Castle\StandardInterceptor.cs" />
+    <Compile Include="Castle\Tokens\DelegateMethods.cs" />
+    <Compile Include="Castle\Tokens\FormatterServicesMethods.cs" />
+    <Compile Include="Castle\Tokens\InvocationMethods.cs" />
+    <Compile Include="Castle\Tokens\MethodBaseMethods.cs" />
+    <Compile Include="Castle\Tokens\SerializationInfoMethods.cs" />
+    <Compile Include="Castle\Tokens\TypeBuilderMethods.cs" />
+    <Compile Include="Castle\Tokens\TypeMethods.cs" />
+    <Compile Include="Castle\Tokens\TypeUtilMethods.cs" />
+    <Compile Include="Castle\Util\DebugExtender.cs" />
+    <Compile Include="Castle\Util\ILockHolder.cs" />
+    <Compile Include="Castle\Util\ILogger.cs" />
+    <Compile Include="Castle\Util\InterfaceMapping.cs" />
+    <Compile Include="Castle\Util\IUpgradeableLockHolder.cs" />
+    <Compile Include="Castle\Util\Lock.cs" />
+    <Compile Include="Castle\Util\MonitorLock.cs" />
+    <Compile Include="Castle\Util\MonitorLockHolder.cs" />
+    <Compile Include="Castle\Util\MonitorUpgradeableLockHolder.cs" />
+    <Compile Include="Castle\Util\NoOpLock.cs" />
+    <Compile Include="Castle\Util\NullLogger.cs" />
+    <Compile Include="Castle\Util\SerializableAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shim\AppDomain.cs" />
+    <Compile Include="Shim\EmitExtender.cs" />
+    <Compile Include="Shim\EnumExtender.cs" />
+    <Compile Include="Shim\LinqExtender.cs" />
+    <Compile Include="Shim\ListExtender.cs" />
+    <Compile Include="Shim\MissingMethodException.cs" />
+    <Compile Include="Shim\Trace.cs" />
+    <Compile Include="Shim\TypeExtender.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Source\ilmerge.exclude">
+      <Link>ilmerge.exclude</Link>
+    </None>
+    <None Include="..\Source\Language\ICallback.tt">
+      <Link>Language\ICallback.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ICallback1.Generated.cs</LastGenOutput>
+    </None>
+    <None Include="..\Source\Language\IRaise.tt">
+      <Link>Language\IRaise.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IRaise1.Generated.cs</LastGenOutput>
+    </None>
+    <None Include="..\Source\Language\IReturns.tt">
+      <Link>Language\IReturns.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IReturns1.Generated.cs</LastGenOutput>
+    </None>
+    <None Include="..\Source\MethodCall.tt">
+      <Link>MethodCall.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MethodCall1.Generated.cs</LastGenOutput>
+    </None>
+    <None Include="..\Source\MethodCallReturn.tt">
+      <Link>MethodCallReturn.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MethodCallReturn1.Generated.cs</LastGenOutput>
+    </None>
+    <None Include="..\Source\Microsoft\Delegates.tt">
+      <Link>Microsoft\Delegates.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Delegates1.cs</LastGenOutput>
+    </None>
+    <None Include="Moq.snk" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
+    <VisualStudioVersion>11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Moq.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

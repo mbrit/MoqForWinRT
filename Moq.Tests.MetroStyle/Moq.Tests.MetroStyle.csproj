@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0F963B07-AAE5-4BB6-9DA2-08E29F6DDD48}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Moq.Tests.MetroStyle</RootNamespace>
+    <AssemblyName>Moq.Tests.MetroStyle</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>UnitTestProject1_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>BAAFC185DCE61F4FFBF06118D131D9C7C6673D09</PackageCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE, SILVERLIGHT</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ExpressRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AppXPackage>True</AppXPackage>
+  </PropertyGroup>
+  <ItemGroup>
+    <!--A reference to the entire .Net Framework and Windows SDK are automatically included-->
+    <SDKReference Include="MSTestFramework, Version=11.0" />
+    <SDKReference Include="TestPlatform, Version=11.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\UnitTests\AdvancedMatcherAttributeFixture.cs">
+      <Link>AdvancedMatcherAttributeFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\AsInterfaceFixture.cs">
+      <Link>AsInterfaceFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\CallbacksFixture.cs">
+      <Link>CallbacksFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\ConditionalSetupFixture.cs">
+      <Link>ConditionalSetupFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\CustomMatcherFixture.cs">
+      <Link>CustomMatcherFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\Demo.cs">
+      <Link>Demo.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\EmptyDefaultValueProviderFixture.cs">
+      <Link>EmptyDefaultValueProviderFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\ExpressionExtensionsFixture.cs">
+      <Link>ExpressionExtensionsFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\ExtensibilityFixture.cs">
+      <Link>ExtensibilityFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\ExtensionsFixture.cs">
+      <Link>ExtensionsFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\Linq\MockRepositoryQuerying.cs">
+      <Link>Linq\MockRepositoryQuerying.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\Linq\QueryableMocksFixture.cs">
+      <Link>Linq\QueryableMocksFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\Linq\SupportedQuerying.cs">
+      <Link>Linq\SupportedQuerying.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\Linq\UnsupportedQuerying.cs">
+      <Link>Linq\UnsupportedQuerying.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\MatcherAttributeFixture.cs">
+      <Link>MatcherAttributeFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\MatchersFixture.cs">
+      <Link>MatchersFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\Matchers\AnyMatcherFixture.cs">
+      <Link>Matchers\AnyMatcherFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\MockBehaviorFixture.cs">
+      <Link>MockBehaviorFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\MockDefaultValueProviderFixture.cs">
+      <Link>MockDefaultValueProviderFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\MockedEventsFixture.cs">
+      <Link>MockedEventsFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\MockedFixture.cs">
+      <Link>MockedFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\MockFixture.cs">
+      <Link>MockFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\MockRepositoryFixture.cs">
+      <Link>MockRepositoryFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\MockSequenceFixture.cs">
+      <Link>MockSequenceFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\OccurrenceFixture.cs">
+      <Link>OccurrenceFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\OutRefFixture.cs">
+      <Link>OutRefFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\PropertiesFixture.cs">
+      <Link>PropertiesFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\ProtectedMockFixture.cs">
+      <Link>ProtectedMockFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\RecursiveMocksFixture.cs">
+      <Link>RecursiveMocksFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\Regressions\IssueReportsFixture.cs">
+      <Link>Regressions\IssueReportsFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\Regressions\StreamFixture.cs">
+      <Link>Regressions\StreamFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\ReturnsFixture.cs">
+      <Link>ReturnsFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\SequenceExtensionsFixture.cs">
+      <Link>SequenceExtensionsFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\StubExtensionsFixture.cs">
+      <Link>StubExtensionsFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\TimesFixture.cs">
+      <Link>TimesFixture.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTests\VerifyFixture.cs">
+      <Link>VerifyFixture.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shim\AssertExtender.cs" />
+    <Compile Include="Shim\IComponent.cs" />
+    <Compile Include="Shim\IContainer.cs" />
+    <Compile Include="Shim\IServiceProvider.cs" />
+    <Compile Include="Shim\ISite.cs" />
+    <Compile Include="Shim\PlatformID.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\UnitTestLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\UnitTestSmallLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\UnitTestSplashScreen.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\UnitTestStoreLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Moq.snk" />
+    <None Include="UnitTestProject1_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Moq.MetroStyle\Moq.MetroStyle.csproj">
+      <Project>{b78fa8af-af2f-438e-9dc9-2ca8e6e1ea22}</Project>
+      <Name>Moq.MetroStyle</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
+    <VisualStudioVersion>11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Moq.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>  
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
