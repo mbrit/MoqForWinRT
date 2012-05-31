@@ -108,7 +108,12 @@ namespace Moq.Matchers
 			// throw if validatorMethod doesn't exists			
 			if (method == null)
 			{
-				throw new MissingMethodException(string.Format(CultureInfo.CurrentCulture,
+#if !NETFX_CORE
+				throw new MissingMethodException(
+#else
+				throw new SpecialMissingMethodException(
+#endif
+					string.Format(CultureInfo.CurrentCulture,
 					"public {0}bool {1}({2}) in class {3}.",
 					call.Method.IsStatic ? "static " : String.Empty,
 					call.Method.Name,

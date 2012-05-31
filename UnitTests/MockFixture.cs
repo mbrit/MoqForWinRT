@@ -156,8 +156,7 @@ namespace Moq.Tests
 		{
 			var mock = new Mock<IFoo>();
 
-			//Assert.True(typeof(IFoo).IsAssignableFrom(mock.Object.GetType()));
-			throw new NotImplementedException("This operation has not been implemented.");
+			Assert.True(typeof(IFoo).IsAssignableFrom(mock.Object.GetType()));
 		}
 
 		[Fact]

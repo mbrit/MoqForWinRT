@@ -60,16 +60,17 @@ namespace Castle.DynamicProxy.Internal
 					return internalsToDynProxy[asm];
 				}
 
+				// @mbrit - 2012-05-31 - can't seem to find this in WinRT...
 #if !NETFX_CORE
 				var internalsVisibleTo = asm.GetAttributes<InternalsVisibleToAttribute>();
 				var found = internalsVisibleTo.Any(VisibleToDynamicProxy);
+#else
+				var found = false;
+#endif
 
 				internalsToDynProxy.Add(asm, found);
 
 				return found;
-#else
-				throw new NotImplementedException("This operation has not been implemented.");
-#endif
 			}
 		}
 

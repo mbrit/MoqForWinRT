@@ -135,7 +135,7 @@ namespace Castle.DynamicProxy.Generators
 
 				var useWinRtGenericHandler = false;
 #if NETFX_CORE
-				if (emitter.ReturnType == typeof(int))
+				if (emitter.ReturnType == typeof(int) || emitter.ReturnType == typeof(bool))
 					useWinRtGenericHandler = true;
 #endif
 				if(!(useWinRtGenericHandler))

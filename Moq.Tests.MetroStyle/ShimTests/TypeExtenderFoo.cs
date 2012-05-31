@@ -1,13 +1,37 @@
-﻿using System;
+﻿//
+// WinRT Reflector Shim - a library to assist in porting frameworks from .NET to WinRT.
+//
+// Copyright (c) 2012 Matthew Baxter-Reynolds 2012 (@mbrit)
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Moq.Tests
+namespace System.Reflection.Tests
 {
-	public class TypeExtenderFoo
+	internal class TypeExtenderFoo
 	{
 		public object PublicInstanceProperty { get; set; }
 		protected object ProtectedInstanceProperty { get; set; }
@@ -34,6 +58,18 @@ namespace Moq.Tests
 		private static event EventHandler PrivateStaticEvent;
 
 		public TypeExtenderFoo()
+		{
+		}
+
+		protected TypeExtenderFoo(float a)
+		{
+		}
+
+		private TypeExtenderFoo(double b)
+		{
+		}
+
+		private TypeExtenderFoo(float a, double b, string c)
 		{
 		}
 
@@ -64,6 +100,10 @@ namespace Moq.Tests
 		// @mbrit - 2012-05-31 - this method is to get rid of warnings...
 		public void FixWarnings()
 		{
+			this.PublicInstanceField = null;
+			Debug.WriteLine(this.PublicInstanceField);
+			this.ProtectedInstanceField = null;
+			Debug.WriteLine(this.ProtectedInstanceField);
 			this.PrivateInstanceField = null;
 			Debug.WriteLine(this.PrivateInstanceField);
 
@@ -79,6 +119,10 @@ namespace Moq.Tests
 		// @mbrit - 2012-05-31 - this method is to get rid of warnings...
 		public static void FixWarningsStatic()
 		{
+			PublicStaticField = null;
+			Debug.WriteLine(PublicStaticField);
+			ProtectedStaticField = null;
+			Debug.WriteLine(ProtectedStaticField);
 			PrivateStaticField = null;
 			Debug.WriteLine(PrivateStaticField);
 
@@ -95,5 +139,61 @@ namespace Moq.Tests
 		{
 			throw new NotImplementedException();
 		}
+	}
+
+	internal class TypeExtenderFooProps
+	{
+		public object PublicReadWrite { get; set; }
+		private object NonPublicReadWrite { get; set; }
+
+		public object PublicReadOnly
+		{
+			get
+			{
+				return null;
+			}
+		}
+
+		private object NonPublicReadOnly
+		{
+			get
+			{
+				return null;
+			}
+		}
+
+		public object PublicWriteOnly
+		{
+			set
+			{
+			}
+		}
+
+		private object NonPublicWriteOnly
+		{
+			set
+			{
+			}
+		}
+	}
+
+	internal interface IFoo
+	{
+	}
+
+	internal interface IFoo2
+	{
+	}
+
+	internal interface IFoo3
+	{
+	}
+
+	internal class TypeExtenderFooInterfaces : IFoo, IFoo2
+	{
+	}
+
+	internal class TypeExtenderFooInterfaces2 : TypeExtenderFooInterfaces, IFoo3
+	{
 	}
 }

@@ -90,7 +90,11 @@ namespace Moq.Proxy
 			{
 				throw new ArgumentException(Resources.InvalidMockClass, e);
 			}
+#if !NETFX_CORE
 			catch (MissingMethodException e)
+#else
+			catch (SpecialMissingMethodException e)
+#endif
 			{
 				throw new ArgumentException(Resources.ConstructorNotFound, e);
 			}

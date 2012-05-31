@@ -1463,7 +1463,11 @@ namespace Castle.DynamicProxy
 			{
 				return Activator.CreateInstance(proxyType, proxyArguments.ToArray());
 			}
+#if !NETFX_CORE
 			catch (MissingMethodException)
+#else
+			catch(Exception)			// WinRT doesn't have MissingMethodException...
+#endif
 			{
 				var message = new StringBuilder();
 				message.AppendFormat("Can not instantiate proxy of class: {0}.", classToProxy.FullName);

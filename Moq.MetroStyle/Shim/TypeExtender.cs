@@ -1,4 +1,28 @@
-﻿using System;
+﻿//
+// WinRT Reflector Shim - a library to assist in porting frameworks from .NET to WinRT.
+//
+// Copyright (c) 2012 Matthew Baxter-Reynolds 2012 (@mbrit)
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,48 +32,48 @@ using System.Reflection.Emit;
 
 namespace System.Reflection
 {
-	internal static class TypeExtender
+	public static class TypeExtender
 	{
 		public static Type[] EmptyTypes = { };
 
-		internal static Assembly Assembly(this Type type)
+		public static Assembly Assembly(this Type type)
 		{
 			return type.GetTypeInfo().Assembly;
 		}
 
-		internal static bool IsGenericType(this Type type)
+		public static bool IsGenericType(this Type type)
 		{
 			return type.GetTypeInfo().IsGenericType;
 		}
 
-		internal static bool IsGenericTypeDefinition(this Type type)
+		public static bool IsGenericTypeDefinition(this Type type)
 		{
 			return type.GetTypeInfo().IsGenericTypeDefinition;
 		}
 
-		internal static bool IsAssignableFrom(this Type type, Type toCheck)
+		public static bool IsAssignableFrom(this Type type, Type toCheck)
 		{
 			return type.GetTypeInfo().IsAssignableFrom(toCheck.GetTypeInfo());
 		}
 
-		internal static bool IsInstanceOf(this Type type, object toCheck)
+		public static bool IsInstanceOf(this Type type, object toCheck)
 		{
 			throw new NotImplementedException("This operation has not been implemented.");
 		}
 
-		internal static bool IsSubclassOf(this Type type, Type toCheck)
+		public static bool IsSubclassOf(this Type type, Type toCheck)
 		{
 			return type.GetTypeInfo().IsSubclassOf(toCheck);
 		}
 
-		public static MethodInfo GetMethod(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
+		public static MethodInfo GetMethod(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static)
 		{
 			return GetMember<MethodInfo>(type, name, flags);
 		}
 
 		public static MethodInfo GetMethod(this Type type, string name, Type[] parameters)
 		{
-			return type.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
+			return type.GetMethod(name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static, null, parameters, null);
 		}
 
 		public static MethodInfo GetMethod(this Type type, string name, BindingFlags flags, object binder, Type[] parameters, object[] modifiers)
@@ -57,156 +81,151 @@ namespace System.Reflection
 			return type.GetMethod(name, flags, null, CallingConventions.Any, parameters, modifiers);
 		}
 
-		public static MethodInfo GetMethod(this Type type, string name, BindingFlags flags, object binder, CallingConventions callConvention, Type[] parameters, object[] modifiers)
+		public static MethodInfo GetMethod(this Type type, string name, BindingFlags flags, object binder, CallingConventions callConvention, Type[] parameters,
+			object[] modifiers)
 		{
-			foreach (var method in type.GetTypeInfo().DeclaredMethods.Where(v => v.Name == name))
+			foreach (var method in type.GetMethods(flags))
 			{
-				if (method.CheckBindings(flags) && CheckParameters(method, parameters))
+				if (method.Name == name && CheckParameters(method, parameters))
 					return method;
 			}
 
-			// not found
-			throw new MissingMethodException(string.Format("A method called '{0}' on type '{1}' was not found.", name, type));
+			return null;
 		}
 
-		//internal static Assembly GetAssembly(this Type type)
-		//{
-		//	return type.GetTypeInfo().Assembly();
-		//}
-
-		internal static bool IsInterface(this Type type)
+		public static bool IsInterface(this Type type)
 		{
 			return type.GetTypeInfo().IsInterface;
 		}
 
-		internal static bool IsClass(this Type type)
+		public static bool IsClass(this Type type)
 		{
 			return type.GetTypeInfo().IsClass;
 		}
 
-		internal static bool IsPublic(this Type type)
+		public static bool IsPublic(this Type type)
 		{
 			return type.GetTypeInfo().IsPublic;
 		}
 
-		internal static bool IsArray(this Type type)
+		public static bool IsArray(this Type type)
 		{
 			return type.GetTypeInfo().IsArray;
 		}
 
-		internal static bool IsEnum(this Type type)
+		public static bool IsEnum(this Type type)
 		{
 			return type.GetTypeInfo().IsEnum;
 		}
 
-		internal static bool IsNestedPublic(this Type type)
+		public static bool IsNestedPublic(this Type type)
 		{
 			return type.GetTypeInfo().IsNestedPublic;
 		}
 
-		internal static bool IsNestedAssembly(this Type type)
+		public static bool IsNestedAssembly(this Type type)
 		{
 			return type.GetTypeInfo().IsNestedAssembly;
 		}
 
-		internal static bool IsNestedFamORAssem(this Type type)
+		public static bool IsNestedFamORAssem(this Type type)
 		{
 			return type.GetTypeInfo().IsNestedFamORAssem;
 		}
 
-		internal static bool IsVisible(this Type type)
+		public static bool IsVisible(this Type type)
 		{
 			return type.GetTypeInfo().IsVisible;
 		}
 
-		internal static bool IsAbstract(this Type type)
+		public static bool IsAbstract(this Type type)
 		{
 			return type.GetTypeInfo().IsAbstract;
 		}
 
-		internal static bool IsSealed(this Type type)
+		public static bool IsSealed(this Type type)
 		{
 			return type.GetTypeInfo().IsSealed;
 		}
 
-		internal static bool IsPrimitive(this Type type)
+		public static bool IsPrimitive(this Type type)
 		{
 			return type.GetTypeInfo().IsPrimitive;
 		}
 
-		internal static bool IsValueType(this Type type)
+		public static bool IsValueType(this Type type)
 		{
 			return type.GetTypeInfo().IsValueType;
 		}
 
-		internal static MethodBase DeclaringMethod(this Type type)
+		public static MethodBase DeclaringMethod(this Type type)
 		{
 			return type.GetTypeInfo().DeclaringMethod;
 		}
 
-		internal static Type UnderlyingSystemType(this Type type)
+		public static Type UnderlyingSystemType(this Type type)
 		{
 			// @mbrit - 2012-05-30 - this needs more science... UnderlyingSystemType isn't supported
 			// in WinRT, but unclear why this was used...
 			return type;
 		}
 
-		internal static bool ContainsGenericParameters(this Type type)
+		public static bool ContainsGenericParameters(this Type type)
 		{
 			return type.GetTypeInfo().ContainsGenericParameters;
 		}
 
-		internal static GenericParameterAttributes GenericParameterAttributes(this Type type)
+		public static GenericParameterAttributes GenericParameterAttributes(this Type type)
 		{
 			return type.GetTypeInfo().GenericParameterAttributes;
 		}
 
-		internal static Type BaseType(this Type type)
+		public static Type BaseType(this Type type)
 		{
 			return type.GetTypeInfo().BaseType;
 		}
 
-		internal static Type[] GetInterfaces(this Type type)
+		public static Type[] GetInterfaces(this Type type)
 		{
 			return type.GetTypeInfo().ImplementedInterfaces.ToArray();
 		}
 
-		internal static InterfaceMapping GetInterface(this Type type, Type interfaceType)
+		public static InterfaceMapping GetInterface(this Type type, Type interfaceType)
 		{
 			throw new NotImplementedException("This operation has not been implemented.");
 		}
 
-		internal static object[] GetCustomAttributes(this Type type, bool inherit = false)
+		public static object[] GetCustomAttributes(this Type type, bool inherit = false)
 		{
 			return type.GetTypeInfo().GetCustomAttributes(inherit).ToArray();
 		}
 
-		internal static object[] GetCustomAttributes(this Type type, Type attributeType, bool inherit = false)
+		public static object[] GetCustomAttributes(this Type type, Type attributeType, bool inherit = false)
 		{
 			return type.GetTypeInfo().GetCustomAttributes(attributeType, inherit).ToArray();
 		}
 
-		internal static ConstructorInfo[] GetConstructors(this Type type, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
+		public static ConstructorInfo[] GetConstructors(this Type type, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
 		{
 			return GetMembers<ConstructorInfo>(type, flags).ToArray();
 		}
 
-		internal static PropertyInfo[] GetProperties(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
+		public static PropertyInfo[] GetProperties(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
 		{
 			return GetMembers<PropertyInfo>(type, flags).ToArray();
 		}
 
-		internal static MethodInfo[] GetMethods(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
+		public static MethodInfo[] GetMethods(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
 		{
 			return GetMembers<MethodInfo>(type, flags).ToArray();
 		}
 
-		internal static FieldInfo[] GetFields(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
+		public static FieldInfo[] GetFields(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
 		{
 			return GetMembers<FieldInfo>(type, flags).ToArray();
 		}
 
-		internal static EventInfo[] GetEvents(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
+		public static EventInfo[] GetEvents(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
 		{
 			return GetMembers<EventInfo>(type, flags).ToArray();
 		}
@@ -217,36 +236,48 @@ namespace System.Reflection
 			var results = new List<T>();
 
 			var info = type.GetTypeInfo();
+			bool inParent = false;
 			while (true)
 			{
 				foreach (T member in info.DeclaredMembers.Where(v => typeof(T).IsAssignableFrom(v.GetType())))
 				{
-					if (member.CheckBindings(flags))
+					if (member.CheckBindings(flags, inParent))
 						results.Add(member);
 				}
 
+				// constructors never walk the hierarchy...
+				if (typeof(T) == typeof(ConstructorInfo))
+					break;
+
+				// up...
 				if (info.BaseType == null)
 					break;
 				info = info.BaseType.GetTypeInfo();
+				inParent = true;
 			}
 
 			return results;
 		}
 
-		public static ConstructorInfo GetConstructor(this Type type, params Type[] types)
+		public static ConstructorInfo GetConstructor(this Type type, Type[] types)
 		{
 			return type.GetConstructor(BindingFlags.Public, null, types, null);
 		}
 
 		public static ConstructorInfo GetConstructor(this Type type, BindingFlags flags, object binder, Type[] types, object[] modifiers)
 		{
+			// can't have static constructors...
+			flags |= BindingFlags.Instance | BindingFlags.Static;
+			flags ^= BindingFlags.Static;
+
+			// walk...
 			foreach (ConstructorInfo info in type.GetTypeInfo().DeclaredConstructors)
 			{
-				if (info.CheckBindings(flags) && CheckParameters(info, types))
+				if (info.CheckBindings(flags, false) && CheckParameters(info, types))
 					return info;
 			}
 
-			throw new MissingMemberException("Constructor not found.");
+			return null;
 		}
 
 		private static bool CheckParameters(MethodBase method, Type[] parameters)
@@ -273,17 +304,17 @@ namespace System.Reflection
 			return false;
 		}
 
-		public static PropertyInfo GetProperty(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
+		public static PropertyInfo GetProperty(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static)
 		{
 			return GetMember<PropertyInfo>(type, name, flags);
 		}
 
-		public static EventInfo GetEvent(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
+		public static EventInfo GetEvent(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static)
 		{
 			return GetMember<EventInfo>(type, name, flags);
 		}
 
-		public static FieldInfo GetField(this Type type, string name, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
+		public static FieldInfo GetField(this Type type, string name, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static)
 		{
 			return GetMember<FieldInfo>(type, name, flags);
 		}
@@ -291,24 +322,13 @@ namespace System.Reflection
 		private static T GetMember<T>(Type type, string name, BindingFlags flags)
 			where T : MemberInfo
 		{
-			// walk up the hierarchy...
-			var info = type.GetTypeInfo();
-			while (true)
+			// walk...
+			foreach (var member in GetMembers<T>(type, flags))
 			{
-				// walk...
-				foreach (var member in info.DeclaredMembers.Where(v => typeof(T).IsAssignableFrom(v.GetType()) && v.Name == name))
-				{
-					if (member.CheckBindings(flags))
-						return (T)member;
-				}
-
-				// up...
-				if (info.BaseType == null)
-					break;
-				info = info.BaseType.GetTypeInfo();
+				if (member.Name == name)
+					return (T)member;
 			}
 
-			// msdn docs say missing methods return null...
 			return null;
 		}
 
@@ -318,12 +338,19 @@ namespace System.Reflection
 			var info = type.GetTypeInfo();
 			while (true)
 			{
-				foreach (var iface in type.GetTypeInfo().ImplementedInterfaces)
+				foreach (var iface in type.GetInterfaces())
 				{
-					if (ignoreCase && string.Compare(iface.Name, name, StringComparison.CurrentCultureIgnoreCase) == 0)
-						return iface;
-					else if (!(ignoreCase) && iface.Name == name)
-						return iface;
+					if (ignoreCase)
+					{
+						// this matches just the name...
+						if (string.Compare(iface.Name, name, StringComparison.CurrentCultureIgnoreCase) == 0)
+							return iface;
+					}
+					else
+					{
+						if (iface.FullName == name || iface.Name == name)
+							return iface;
+					}
 				}
 
 				// up...
@@ -332,83 +359,83 @@ namespace System.Reflection
 				info = info.BaseType.GetTypeInfo();
 			}
 
-			throw new MissingMemberException(string.Format("An interface with name '{0}' was not found on '{1}'.", name, type));
+			return null;
 		}
 
-		internal static Type[] GetGenericArguments(this Type type)
+		public static Type[] GetGenericArguments(this Type type)
 		{
 			return type.GetTypeInfo().GenericTypeArguments;
 		}
 
-		internal static Type[] GetGenericParameterConstraints(this Type type)
+		public static Type[] GetGenericParameterConstraints(this Type type)
 		{
 			return type.GetTypeInfo().GetGenericParameterConstraints();
 		}
 
-		internal static object GetCustomAttribute<T>(this Type type, bool inherit = false)
+		public static object GetCustomAttribute<T>(this Type type, bool inherit = false)
 			where T : Attribute
 		{
 			return type.GetTypeInfo().GetCustomAttribute<T>(inherit);
 		}
 
-		internal static InterfaceMapping GetInterfaceMap(this Type type, Type interfaceType)
+		public static InterfaceMapping GetInterfaceMap(this Type type, Type interfaceType)
 		{
 			throw new NotImplementedException("This operation has not been implemented.");
 		}
 
-		internal static TypeCode GetTypeCode(this Type type)
+		public static TypeCode GetTypeCode(this Type type)
 		{
 			throw new NotImplementedException("This operation has not been implemented.");
 		}
 	}
 
-	internal static class PropertyInfoExtender
+	public static class PropertyInfoExtender
 	{
-		internal static MethodInfo GetGetMethod(this PropertyInfo prop, bool nonPublic = false)
+		public static MethodInfo GetGetMethod(this PropertyInfo prop, bool nonPublic = false)
 		{
 			// @mbrit - 2012-05-30 - non-public not supported in winrt...
-			if (prop.GetMethod.IsPublic || nonPublic)
+			if (prop.GetMethod != null && (prop.GetMethod.IsPublic || nonPublic))
 				return prop.GetMethod;
 			else
 				return null;
 		}
 
-		internal static MethodInfo GetSetMethod(this PropertyInfo prop, bool nonPublic = false)
+		public static MethodInfo GetSetMethod(this PropertyInfo prop, bool nonPublic = false)
 		{
 			// @mbrit - 2012-05-30 - non-public not supported in winrt...
-			if (prop.SetMethod.IsPublic || nonPublic)
+			if (prop.SetMethod != null && (prop.SetMethod.IsPublic || nonPublic))
 				return prop.SetMethod;
 			else
 				return null;
 		}
 
-		internal static Type ReflectedType(this PropertyInfo prop)
+		public static Type ReflectedType(this PropertyInfo prop)
 		{
 			// this isn't right...
 			return prop.DeclaringType;
 		}
 	}
 
-	internal static class ParameterInfoExtender
+	public static class ParameterInfoExtender
 	{
-		internal static bool HasAttribute<T>(this ParameterInfo info)
+		public static bool HasAttribute<T>(this ParameterInfo info)
 			where T : Attribute
 		{
 			throw new NotImplementedException("This operation has not been implemented.");
 		}
 	}
 
-	internal static class MemberInfoExtender
+	public static class MemberInfoExtender
 	{
-		internal static MemberTypes MemberType(this MemberInfo member)
+		public static MemberTypes MemberType(this MemberInfo member)
 		{
-			if(member is MethodInfo)
+			if (member is MethodInfo)
 				return ((MethodInfo)member).MemberType();
 			else
 				throw new NotSupportedException(string.Format("Cannot handle '{0}'.", member.GetType()));
 		}
 
-		internal static Type ReflectedType(this MemberInfo member)
+		public static Type ReflectedType(this MemberInfo member)
 		{
 			// this isn't right...
 			if (member is MethodInfo)
@@ -417,22 +444,26 @@ namespace System.Reflection
 				throw new NotSupportedException(string.Format("Cannot handle '{0}'.", member.GetType()));
 		}
 
-		internal static bool HasAttribute<T>(this MemberInfo member, bool inherit = false)
+		public static bool HasAttribute<T>(this MemberInfo member, bool inherit = false)
 			where T : Attribute
 		{
 			return member.HasAttribute(typeof(T), inherit);
 		}
 
-		internal static bool HasAttribute(this MemberInfo member, Type type, bool inherit = false)
+		public static bool HasAttribute(this MemberInfo member, Type type, bool inherit = false)
 		{
 			throw new NotImplementedException("This operation has not been implemented.");
 		}
 
-		internal static bool CheckBindings(this MemberInfo member, BindingFlags flags)
+		public static bool CheckBindings(this MemberInfo member, BindingFlags flags, bool inParent)
 		{
 			if ((member.IsStatic() & (flags & BindingFlags.Static) == BindingFlags.Static) ||
 				(!(member.IsStatic()) & (flags & BindingFlags.Instance) == BindingFlags.Instance))
 			{
+				// if we're static and we're in parent, and we haven't specified flatten hierarchy, we can't match...
+				if (inParent && (int)(flags & BindingFlags.FlattenHierarchy) == 0 && member.IsStatic())
+					return false;
+
 				if ((member.IsPublic() & (flags & BindingFlags.Public) == BindingFlags.Public) ||
 					(!(member.IsPublic()) & (flags & BindingFlags.NonPublic) == BindingFlags.NonPublic))
 				{
@@ -445,7 +476,7 @@ namespace System.Reflection
 				return false;
 		}
 
-		internal static bool IsStatic(this MemberInfo member)
+		public static bool IsStatic(this MemberInfo member)
 		{
 			if (member is MethodBase)
 				return ((MethodBase)member).IsStatic;
@@ -465,7 +496,7 @@ namespace System.Reflection
 				throw new NotSupportedException(string.Format("Cannot handle '{0}'.", member.GetType()));
 		}
 
-		internal static bool IsPublic(this MemberInfo member)
+		public static bool IsPublic(this MemberInfo member)
 		{
 			if (member is MethodBase)
 				return ((MethodBase)member).IsPublic;
@@ -486,60 +517,80 @@ namespace System.Reflection
 		}
 	}
 
-	internal static class MethodInfoExtender
+	public static class MethodInfoExtender
 	{
-		internal static MemberTypes MemberType(this MethodInfo method)
+		public static MemberTypes MemberType(this MethodInfo method)
 		{
 			return MemberTypes.Method;
 		}
 
-		internal static Type ReflectedType(this MethodInfo method)
+		public static Type ReflectedType(this MethodInfo method)
 		{
 			// this isn't right...
 			return method.DeclaringType;
 		}
 
-		internal static MethodInfo GetBaseDefinition(this MethodInfo method)
+		public static MethodInfo GetBaseDefinition(this MethodInfo method)
 		{
 			throw new NotImplementedException("This operation has not been implemented.");
 		}
 	}
 
-	internal static class EventInfoExtender
+	public static class EventInfoExtender
 	{
-		internal static MethodInfo GetAddMethod(this EventInfo e, bool nonPublic)
+		public static MethodInfo GetAddMethod(this EventInfo e, bool nonPublic = false)
 		{
-			if (e.AddMethod != null || nonPublic)
+			if (e.AddMethod != null && (e.AddMethod.IsPublic || nonPublic))
 				return e.AddMethod;
 			else
 				return null;
 		}
 
-		internal static MethodInfo GetRemoveMethod(this EventInfo e, bool nonPublic)
+		public static MethodInfo GetRemoveMethod(this EventInfo e, bool nonPublic = false)
 		{
-			if (e.RemoveMethod != null || nonPublic)
+			if (e.RemoveMethod != null && (e.RemoveMethod.IsPublic || nonPublic))
 				return e.RemoveMethod;
 			else
 				return null;
 		}
 	}
 
-	internal static class AssemblyExtender
+	public static class AssemblyExtender
 	{
-		internal static object[] GetAttributes<T>()
+		public static object[] GetAttributes<T>()
 			where T : Attribute
 		{
 			throw new NotImplementedException("This operation has not been implemented.");
 		}
 	}
-	
+
+	public class InterfaceMapping
+	{
+		public MethodInfo[] TargetMethods
+		{
+			get
+			{
+				throw new NotImplementedException("This operation has not been implemented.");
+			}
+		}
+
+		public MethodInfo[] InterfaceMethods
+		{
+			get
+			{
+				throw new NotImplementedException("This operation has not been implemented.");
+			}
+		}
+	}
+
 	[Flags]
 	public enum BindingFlags
 	{
 		Instance = 4,
 		Static = 8,
 		Public = 16,
-		NonPublic = 32
+		NonPublic = 32,
+		FlattenHierarchy = 64,
 	}
 
 	[Flags]

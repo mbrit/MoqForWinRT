@@ -4,6 +4,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
 using Assert = Moq.Tests.AssertExtender;
+using MissingMethodException = Moq.SpecialMissingMethodException;
 using System.Reflection;
 #else
 using Xunit;
