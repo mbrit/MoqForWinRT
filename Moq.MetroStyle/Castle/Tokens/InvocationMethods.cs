@@ -62,6 +62,11 @@ namespace Castle.DynamicProxy.Tokens
 		public static readonly MethodInfo GetReturnValue =
 			typeof(AbstractInvocation).GetMethod("get_ReturnValue");
 
+#if NETFX_CORE
+		public static readonly MethodInfo GetReturnValueForWinRt =
+			typeof(AbstractInvocation).GetMethod("GetReturnValueForWinRt");	
+#endif
+
 		public static readonly ConstructorInfo InheritanceInvocationConstructorNoSelector =
 			typeof(InheritanceInvocation).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null,
 			                                             new[]

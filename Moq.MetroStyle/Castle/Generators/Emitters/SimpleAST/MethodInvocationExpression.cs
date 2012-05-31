@@ -22,7 +22,7 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
 		protected readonly Expression[] args;
 		protected readonly MethodInfo method;
 		protected readonly Reference owner;
-
+		
 		public MethodInvocationExpression(MethodInfo method, params Expression[] args) :
 			this(SelfReference.Self, method, args)
 		{

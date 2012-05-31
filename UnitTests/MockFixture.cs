@@ -66,17 +66,37 @@ namespace Moq.Tests
 		[Fact]
 		public void CallParameterCanBeMethodCall()
 		{
+			// @mbrit - 2012-05-31 - this doesn't work - looks like a problem with boxing (the values
+			// returned seem to be an internal reference to the object...)
 			int value = 5;
 			var mock = new Mock<IFoo>();
 
 			mock.Setup(x => x.Echo(GetValue(value))).Returns(() => value * 2);
 
-			Assert.Equal(value * 2, mock.Object.Echo(value * 2));
+			var result = mock.Object.Echo(value * 2);
+			Assert.Equal(value * 2, result);
 		}
 
 		private int GetValue(int value)
 		{
 			return value * 2;
+		}
+
+		[Fact]
+		public void CallParameterCanBeMethodCall2()
+		{
+			// @mbrit - 2012-05-31 - test to try out the theory that it's boxing that's breaking this...
+			string value = "5";
+			var mock = new Mock<IFoo>();
+
+			mock.Setup(x => x.EchoString(GetValue(value))).Returns(() => value + value);
+
+			Assert.Equal(value + value, mock.Object.EchoString(value + value));
+		}
+
+		private string GetValue(string value)
+		{
+			return value + value;
 		}
 
 		[Fact]
@@ -879,6 +899,9 @@ namespace Moq.Tests
 			void Submit();
 			string Execute(string command);
 			int this[int index] { get; set; }
+
+			// @mbrit - 2012-05-30 - added this to text boxing...
+			string EchoString(string value);
 		}
 
 		public interface IParams

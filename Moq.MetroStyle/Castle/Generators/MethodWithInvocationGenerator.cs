@@ -129,8 +129,29 @@ namespace Castle.DynamicProxy.Generators
 			if (MethodToOverride.ReturnType != typeof(void))
 			{
 				// Emit code to return with cast from ReturnValue
-				var getRetVal = new MethodInvocationExpression(invocationLocal, InvocationMethods.GetReturnValue);
-				emitter.CodeBuilder.AddStatement(new ReturnStatement(new ConvertExpression(emitter.ReturnType, getRetVal)));
+
+				// @mbrit - 2012-05-31 - see the note associated with the GetReturnValueForWinRt declaration
+				// for more information on this...
+
+				var useWinRtGenericHandler = false;
+#if NETFX_CORE
+				if (emitter.ReturnType == typeof(int))
+					useWinRtGenericHandler = true;
+#endif
+				if(!(useWinRtGenericHandler))
+				{
+					var getRetVal = new MethodInvocationExpression(invocationLocal, InvocationMethods.GetReturnValue);
+					emitter.CodeBuilder.AddStatement(new ReturnStatement(new ConvertExpression(emitter.ReturnType, getRetVal)));
+				}
+				else
+				{
+#if NETFX_CORE
+					var grvArgs = new Type[] { emitter.ReturnType };
+					var grvCall = InvocationMethods.GetReturnValueForWinRt.MakeGenericMethod(grvArgs);
+					var getRetVal = new MethodInvocationExpression(invocationLocal, grvCall);
+					emitter.CodeBuilder.AddStatement(new ReturnStatement(getRetVal));
+#endif
+				}
 			}
 			else
 			{

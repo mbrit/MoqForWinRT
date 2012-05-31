@@ -68,7 +68,7 @@ namespace Moq.Tests
 		}
 
 		[Fact]
-		public void ShoulSupportMethod()
+		public void ShouldSupportMethod()
 		{
 			var expected = new Mock<IBar>().Object;
 			var target = Mocks.Of<IFoo>().First(x => x.Find(It.IsAny<string>()) == expected);

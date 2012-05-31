@@ -116,6 +116,25 @@ namespace Castle.DynamicProxy
 
 		public object ReturnValue { get; set; }
 
+#if NETFX_CORE
+		// @mbrit - 2012-05-31 - something is broken with casting, or boxing, or similiar 
+		// on the WinRT side. this approach provides for performing stronger type mangling
+		// in this explicit method, rather than relying on emitting the correct IL...
+		public T GetReturnValueForWinRt<T>()
+		{
+			// if we don't have a value, just punt it back...
+			if (this.ReturnValue == null)
+				return default(T);
+
+			// if we can cast, just do that...
+			var type = this.ReturnValue.GetType();
+			if (typeof(T).IsAssignableFrom(type))
+				return (T)this.ReturnValue;
+			else
+				return (T)Convert.ChangeType(this.ReturnValue, typeof(T));
+		}
+#endif
+
 		public object[] Arguments
 		{
 			get { return arguments; }

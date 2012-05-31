@@ -80,9 +80,10 @@ namespace Moq.Tests
 			Assert.AreSame(a, b);
 		}
 
-		internal static void IsAssignableFrom<T1>(object value)
+		internal static void IsAssignableFrom<T>(object value)
 		{
-			throw new NotImplementedException();
+			if (!(typeof(T).GetType().IsAssignableFrom(value.GetType())))
+				throw new InvalidOperationException(string.Format("Assignability mismatch: '{0}' and '{1}'.", value.GetType(), typeof(T)));
 		}
 
 		internal static void DoesNotThrow(Action callback)

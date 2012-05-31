@@ -224,6 +224,8 @@
       <Link>VerifyFixture.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShimTests\TypeExtenderFoo.cs" />
+    <Compile Include="ShimTests\TypeExtenderTests.cs" />
     <Compile Include="Shim\AssertExtender.cs" />
     <Compile Include="Shim\IComponent.cs" />
     <Compile Include="Shim\IContainer.cs" />

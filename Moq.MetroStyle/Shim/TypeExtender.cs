@@ -44,23 +44,7 @@ namespace System.Reflection
 
 		public static MethodInfo GetMethod(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
 		{
-			// walk up the hierarchy...
-			var info = type.GetTypeInfo();
-			while(info != null)
-			{
-				foreach (var method in info.DeclaredMethods.Where(v => v.Name == name))
-				{
-					if (method.CheckBindings(flags))
-						return method;
-				}
-
-				// up...
-				info = info.BaseType.GetTypeInfo();
-			}
-
-
-			// not found
-			throw new MissingMethodException(string.Format("A method called '{0}' on type '{1}' was not found.", name, type));
+			return GetMember<MethodInfo>(type, name, flags);
 		}
 
 		public static MethodInfo GetMethod(this Type type, string name, Type[] parameters)
@@ -204,39 +188,49 @@ namespace System.Reflection
 
 		internal static ConstructorInfo[] GetConstructors(this Type type, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
 		{
-			// flags are ignored - only public instance members are available in WinRT...
-			return type.GetTypeInfo().DeclaredConstructors.ToArray();
+			return GetMembers<ConstructorInfo>(type, flags).ToArray();
 		}
 
 		internal static PropertyInfo[] GetProperties(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
 		{
-			return type.GetTypeInfo().DeclaredProperties.ToArray();
+			return GetMembers<PropertyInfo>(type, flags).ToArray();
 		}
 
 		internal static MethodInfo[] GetMethods(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
 		{
-			return type.GetTypeInfo().DeclaredMethods.ToArray();
+			return GetMembers<MethodInfo>(type, flags).ToArray();
 		}
 
 		internal static FieldInfo[] GetFields(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
 		{
-			return type.GetTypeInfo().DeclaredFields.ToArray();
+			return GetMembers<FieldInfo>(type, flags).ToArray();
 		}
 
 		internal static EventInfo[] GetEvents(this Type type, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
 		{
-			return type.GetTypeInfo().DeclaredEvents.ToArray();
+			return GetMembers<EventInfo>(type, flags).ToArray();
 		}
 
-		public static FieldInfo GetField(this Type type, string name, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
+		private static List<T> GetMembers<T>(Type type, BindingFlags flags)
+			where T : MemberInfo
 		{
-			foreach (var field in type.GetTypeInfo().DeclaredFields.Where(v => v.Name == name))
+			var results = new List<T>();
+
+			var info = type.GetTypeInfo();
+			while (true)
 			{
-				if (field.CheckBindings(flags))
-					return field;
+				foreach (T member in info.DeclaredMembers.Where(v => typeof(T).IsAssignableFrom(v.GetType())))
+				{
+					if (member.CheckBindings(flags))
+						results.Add(member);
+				}
+
+				if (info.BaseType == null)
+					break;
+				info = info.BaseType.GetTypeInfo();
 			}
 
-			throw new MissingMemberException(string.Format("Failed to find field '{0}' on type '{1}'.", name, type));
+			return results;
 		}
 
 		public static ConstructorInfo GetConstructor(this Type type, params Type[] types)
@@ -281,31 +275,64 @@ namespace System.Reflection
 
 		public static PropertyInfo GetProperty(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
 		{
-			// walk up the hierarchy...
-			var info = type.GetTypeInfo();
-			while (info != null)
-			{
-				foreach (var prop in info.DeclaredProperties.Where(v => v.Name == name))
-				{
-					if (prop.CheckBindings(flags))
-						return prop;
-				}
-
-				// up...
-				info = info.BaseType.GetTypeInfo();
-			}
-
-			throw new MissingMemberException(string.Format("A property with name '{0}' was not found on '{1}'.", name, type));
+			return GetMember<PropertyInfo>(type, name, flags);
 		}
 
 		public static EventInfo GetEvent(this Type type, string name, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
 		{
-			throw new NotImplementedException("This operation has not been implemented.");
+			return GetMember<EventInfo>(type, name, flags);
+		}
+
+		public static FieldInfo GetField(this Type type, string name, BindingFlags flags = BindingFlags.Instance | BindingFlags.Public)
+		{
+			return GetMember<FieldInfo>(type, name, flags);
+		}
+
+		private static T GetMember<T>(Type type, string name, BindingFlags flags)
+			where T : MemberInfo
+		{
+			// walk up the hierarchy...
+			var info = type.GetTypeInfo();
+			while (true)
+			{
+				// walk...
+				foreach (var member in info.DeclaredMembers.Where(v => typeof(T).IsAssignableFrom(v.GetType()) && v.Name == name))
+				{
+					if (member.CheckBindings(flags))
+						return (T)member;
+				}
+
+				// up...
+				if (info.BaseType == null)
+					break;
+				info = info.BaseType.GetTypeInfo();
+			}
+
+			// msdn docs say missing methods return null...
+			return null;
 		}
 
 		public static Type GetInterface(this Type type, string name, bool ignoreCase = false)
 		{
-			throw new NotImplementedException("This operation has not been implemented.");
+			// walk up the hierarchy...
+			var info = type.GetTypeInfo();
+			while (true)
+			{
+				foreach (var iface in type.GetTypeInfo().ImplementedInterfaces)
+				{
+					if (ignoreCase && string.Compare(iface.Name, name, StringComparison.CurrentCultureIgnoreCase) == 0)
+						return iface;
+					else if (!(ignoreCase) && iface.Name == name)
+						return iface;
+				}
+
+				// up...
+				if (info.BaseType == null)
+					break;
+				info = info.BaseType.GetTypeInfo();
+			}
+
+			throw new MissingMemberException(string.Format("An interface with name '{0}' was not found on '{1}'.", name, type));
 		}
 
 		internal static Type[] GetGenericArguments(this Type type)
@@ -318,22 +345,10 @@ namespace System.Reflection
 			return type.GetTypeInfo().GetGenericParameterConstraints();
 		}
 
-		//internal static Type[] FindInterfaces(this Type type, Func<Type, object, bool> filter, object criteria)
-		//{
-		//	List<Type> results = new List<Type>();
-		//	foreach (var iface in type.GetTypeInfo().ImplementedInterfaces)
-		//	{
-		//		if (filter(iface, criteria))
-		//			results.Add(iface);
-		//	}
-
-		//	return results.ToArray();
-		//}
-
 		internal static object GetCustomAttribute<T>(this Type type, bool inherit = false)
 			where T : Attribute
 		{
-			throw new NotImplementedException("This operation has not been implemented.");
+			return type.GetTypeInfo().GetCustomAttribute<T>(inherit);
 		}
 
 		internal static InterfaceMapping GetInterfaceMap(this Type type, Type interfaceType)
@@ -415,8 +430,59 @@ namespace System.Reflection
 
 		internal static bool CheckBindings(this MemberInfo member, BindingFlags flags)
 		{
-			// TBD...
-			return true;
+			if ((member.IsStatic() & (flags & BindingFlags.Static) == BindingFlags.Static) ||
+				(!(member.IsStatic()) & (flags & BindingFlags.Instance) == BindingFlags.Instance))
+			{
+				if ((member.IsPublic() & (flags & BindingFlags.Public) == BindingFlags.Public) ||
+					(!(member.IsPublic()) & (flags & BindingFlags.NonPublic) == BindingFlags.NonPublic))
+				{
+					return true;
+				}
+				else
+					return false;
+			}
+			else
+				return false;
+		}
+
+		internal static bool IsStatic(this MemberInfo member)
+		{
+			if (member is MethodBase)
+				return ((MethodBase)member).IsStatic;
+			else if (member is PropertyInfo)
+			{
+				PropertyInfo prop = (PropertyInfo)member;
+				return (prop.GetMethod != null && prop.GetMethod.IsStatic) || (prop.SetMethod != null && prop.SetMethod.IsStatic);
+			}
+			else if (member is FieldInfo)
+				return ((FieldInfo)member).IsStatic;
+			else if (member is EventInfo)
+			{
+				EventInfo evt = (EventInfo)member;
+				return (evt.AddMethod != null && evt.AddMethod.IsStatic) || (evt.RemoveMethod != null && evt.RemoveMethod.IsStatic);
+			}
+			else
+				throw new NotSupportedException(string.Format("Cannot handle '{0}'.", member.GetType()));
+		}
+
+		internal static bool IsPublic(this MemberInfo member)
+		{
+			if (member is MethodBase)
+				return ((MethodBase)member).IsPublic;
+			else if (member is PropertyInfo)
+			{
+				PropertyInfo prop = (PropertyInfo)member;
+				return (prop.GetMethod != null && prop.GetMethod.IsPublic) || (prop.SetMethod != null && prop.SetMethod.IsPublic);
+			}
+			else if (member is FieldInfo)
+				return ((FieldInfo)member).IsPublic;
+			else if (member is EventInfo)
+			{
+				EventInfo evt = (EventInfo)member;
+				return (evt.AddMethod != null && evt.AddMethod.IsPublic) || (evt.RemoveMethod != null && evt.RemoveMethod.IsPublic);
+			}
+			else
+				throw new NotSupportedException(string.Format("Cannot handle '{0}'.", member.GetType()));
 		}
 	}
 

@@ -468,6 +468,7 @@
     <Compile Include="Castle\Generators\Emitters\SimpleAST\ConvertExpression.cs" />
     <Compile Include="Castle\Generators\Emitters\SimpleAST\DefaultValueExpression.cs" />
     <Compile Include="Castle\Generators\Emitters\SimpleAST\EndExceptionBlockStatement.cs" />
+    <Compile Include="Castle\Generators\Emitters\SimpleAST\ExplicitConvertExpression.cs" />
     <Compile Include="Castle\Generators\Emitters\SimpleAST\Expression.cs" />
     <Compile Include="Castle\Generators\Emitters\SimpleAST\ExpressionStatement.cs" />
     <Compile Include="Castle\Generators\Emitters\SimpleAST\FieldReference.cs" />
